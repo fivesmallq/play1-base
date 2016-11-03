@@ -1,13 +1,13 @@
-package controllers;
+package im.nll.data.play.controllers;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 
-import base.controllers.Created;
-import base.controllers.EvilRequest;
-import base.controllers.NoContent;
-import base.controllers.Unauthorized;
-import models.api.v1.Error;
-import models.api.v1.ErrorCode;
+import im.nll.data.play.controllers.response.Created;
+import im.nll.data.play.controllers.response.EvilRequest;
+import im.nll.data.play.controllers.response.NoContent;
+import im.nll.data.play.controllers.response.Unauthorized;
+import im.nll.data.play.models.api.v1.Error;
+import im.nll.data.play.models.api.v1.ErrorCode;
 import play.Play;
 import play.mvc.Before;
 import play.mvc.Controller;

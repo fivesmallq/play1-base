@@ -1,8 +1,8 @@
-package controllers.interceptor;
+package im.nll.data.play.controllers.interceptor;
 
+import im.nll.data.play.utils.Logs;
 import play.mvc.Before;
 import play.mvc.Controller;
-import utils.Logs;
 
 /**
  * request 日志

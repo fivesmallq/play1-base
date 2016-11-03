@@ -1,10 +1,10 @@
-package utils.open;
+package im.nll.data.play.utils;
 
+
+import static java.net.URLEncoder.encode;
 
 import org.apache.commons.codec.binary.Base64;
 
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.security.InvalidKeyException;
@@ -13,8 +13,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-
-import static java.net.URLEncoder.encode;
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
 
 /**
  *  API signature demo.

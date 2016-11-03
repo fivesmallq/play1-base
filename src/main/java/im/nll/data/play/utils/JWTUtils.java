@@ -1,10 +1,8 @@
-package utils;
+package im.nll.data.play.utils;
 
 import com.auth0.jwt.JWTSigner;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.JWTVerifyException;
-import models.user.User;
-import play.Play;
 
 import java.io.IOException;
 import java.security.InvalidKeyException;
@@ -12,6 +10,8 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SignatureException;
 import java.util.HashMap;
 import java.util.Map;
+import models.user.User;
+import play.Play;
 
 /**
  * @author <a href="mailto:fivesmallq@gmail.com">fivesmallq</a>

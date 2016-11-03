@@ -1,4 +1,4 @@
-package utils;
+package im.nll.data.play.utils;
 
 /**
  * Returns the logger for the calling class. Can be used to determine the
@@ -7,11 +7,10 @@ package utils;
  */
 
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import base.RequestId;
+import im.nll.data.play.controllers.RequestId;
 import play.mvc.Scope;
 
 
@@ -71,7 +70,8 @@ public class Logs {
             sessionId = Scope.Session.current().getId();
         }
         String requestId = RequestId.getId();
-        if (session != null && StringUtils.isNotEmpty(sessionId) && StringUtils.isNotEmpty(requestId)) {
+      if (session != null && StringUtils.isNotNullOrEmpty(sessionId) && StringUtils
+          .isNotNullOrEmpty(requestId)) {
 
             StringBuffer buffer = new StringBuffer(20).append("request-id:").append(requestId).append(" session:").append(sessionId).append(" ").append(s);
             return buffer.toString();

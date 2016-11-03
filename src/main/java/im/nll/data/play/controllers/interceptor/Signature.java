@@ -1,7 +1,9 @@
 /**
  *
  */
-package controllers.interceptor;
+package im.nll.data.play.controllers.interceptor;
+
+import static consts.FirstP2pConsts.CONF_HTTP_PATH;
 
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
@@ -11,14 +13,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
-
 import controllers.BaseController;
 import models.KeyPair;
 import models.ObjectId;
-import models.api.v1.Error;
 import models.api.v1.ErrorCode;
 import play.Logger;
 import play.Play;
@@ -26,8 +25,6 @@ import play.libs.Codec;
 import play.mvc.Before;
 import utils.Logs;
 import utils.open.SignatureUtil;
-
-import static consts.FirstP2pConsts.CONF_HTTP_PATH;
 
 /**
  * validate message signature

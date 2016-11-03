@@ -1,4 +1,4 @@
-package models.api.v1;
+package im.nll.data.play.models.api.v1;
 
 import models.Jsonable;
 

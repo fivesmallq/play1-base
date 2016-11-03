@@ -1,7 +1,8 @@
-package controllers.interceptor;
+package im.nll.data.play.controllers.interceptor;
+
+import org.apache.commons.lang3.StringUtils;
 
 import base.RequestId;
-import org.apache.commons.lang3.StringUtils;
 import play.mvc.Controller;
 import play.mvc.Finally;
 

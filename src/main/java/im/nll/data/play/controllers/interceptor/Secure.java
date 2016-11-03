@@ -1,16 +1,15 @@
-package controllers.interceptor;
+package im.nll.data.play.controllers.interceptor;
 
 import com.auth0.jwt.JWTExpiredException;
-import controllers.BaseController;
-import models.api.v1.Error;
-import models.api.v1.ErrorCode;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.Map;
+import controllers.BaseController;
+import models.api.v1.ErrorCode;
 import play.Play;
 import play.mvc.Before;
 import play.mvc.Http;
 import utils.JWTUtils;
-
-import java.util.Map;
 
 /**
  * JWT验证

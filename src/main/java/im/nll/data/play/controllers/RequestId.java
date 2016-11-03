@@ -1,4 +1,4 @@
-package base;
+package im.nll.data.play.controllers;
 
 /**
  * @author <a href="mailto:fivesmallq@gmail.com">fivesmallq</a>

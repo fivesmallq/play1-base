@@ -1,8 +1,8 @@
-package controllers.interceptor;
+package im.nll.data.play.controllers.interceptor;
 
 import com.alibaba.fastjson.JSONException;
+
 import controllers.BaseController;
-import models.api.v1.Error;
 import models.api.v1.ErrorCode;
 import play.Play;
 import play.mvc.Catch;

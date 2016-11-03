@@ -1,4 +1,4 @@
-package models;
+package im.nll.data.play.models;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.parser.Feature;

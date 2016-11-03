@@ -1,10 +1,11 @@
-package models.api.v1;
+package im.nll.data.play.models.api.v1;
 
-import models.Jsonable;
-import org.apache.commons.lang3.StringUtils;
+
+import org.apache.commons.lang.StringUtils;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import im.nll.data.play.models.Jsonable;
 
 /**
  * 用于api服务器端返回客户端的响应

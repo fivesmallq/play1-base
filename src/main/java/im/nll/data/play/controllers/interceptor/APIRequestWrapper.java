@@ -1,4 +1,4 @@
-package controllers.interceptor;
+package im.nll.data.play.controllers.interceptor;
 
 import base.RequestId;
 import models.ObjectId;

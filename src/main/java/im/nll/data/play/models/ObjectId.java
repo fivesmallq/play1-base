@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package models;
+package im.nll.data.play.models;
 
 import org.slf4j.Logger;
-import utils.Logs;
 
 import java.io.Serializable;
 import java.net.NetworkInterface;
@@ -27,6 +26,7 @@ import java.security.SecureRandom;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.concurrent.atomic.AtomicInteger;
+import utils.Logs;
 
 /**
  * <p>A globally unique identifier for objects.</p>
