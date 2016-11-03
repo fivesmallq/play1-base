@@ -1,15 +1,17 @@
 package im.nll.data.play.controllers.interceptor;
 
-import com.auth0.jwt.JWTExpiredException;
-import org.apache.commons.lang3.StringUtils;
 
-import java.util.Map;
-import controllers.BaseController;
-import models.api.v1.ErrorCode;
+import com.auth0.jwt.JWTExpiredException;
+import im.nll.data.play.controllers.BaseController;
+import im.nll.data.play.models.api.v1.Error;
+import im.nll.data.play.models.api.v1.ErrorCode;
+import im.nll.data.play.utils.JWTUtils;
+import org.apache.commons.lang.StringUtils;
 import play.Play;
 import play.mvc.Before;
 import play.mvc.Http;
-import utils.JWTUtils;
+
+import java.util.Map;
 
 /**
  * JWT验证
@@ -19,9 +21,7 @@ import utils.JWTUtils;
  * @date 15/4/27 下午5:38
  */
 public class Secure extends BaseController {
-    @Before(unless = {"v1.Auth.auth", "v1.CheckCode.send",
-            "v1.firstp2p.Auth.getUser", "v1.firstp2p.Auth.callback", "v1.firstp2p.Auth.appCallback", "" +
-            "v1.Loans.getTerm", "v1.Loans.getWithholding", "v1.Loans.loanApplyStatusNotify"})
+    @Before(unless = {"v1.Auth.auth"})
     static void checkAccess() {
         if (Play.mode.isProd()) {
             Error error = new Error();

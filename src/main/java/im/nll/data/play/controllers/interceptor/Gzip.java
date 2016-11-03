@@ -1,11 +1,12 @@
 package im.nll.data.play.controllers.interceptor;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+import im.nll.data.play.utils.Compression;
 import play.Play;
 import play.mvc.Controller;
 import play.mvc.Finally;
-import utils.Compression;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 /**
  * response gzip压缩.

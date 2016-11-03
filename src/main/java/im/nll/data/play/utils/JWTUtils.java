@@ -3,6 +3,8 @@ package im.nll.data.play.utils;
 import com.auth0.jwt.JWTSigner;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.JWTVerifyException;
+import im.nll.data.play.models.BaseModel;
+import play.Play;
 
 import java.io.IOException;
 import java.security.InvalidKeyException;
@@ -10,8 +12,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SignatureException;
 import java.util.HashMap;
 import java.util.Map;
-import models.user.User;
-import play.Play;
 
 /**
  * @author <a href="mailto:fivesmallq@gmail.com">fivesmallq</a>
@@ -22,7 +22,7 @@ public class JWTUtils {
     public static String secret = Play.configuration.getProperty("application.secret");
     public static String tokenExp = Play.configuration.getProperty("token.exp", "3600");
 
-    public static String sign(User user) {
+    public static String sign(BaseModel user) {
         final long iat = System.currentTimeMillis() / 1000l; // issued at claim
         final long exp = iat + Long.valueOf(tokenExp); // expires claim. In this case the token expires in 60 * 60 seconds
 

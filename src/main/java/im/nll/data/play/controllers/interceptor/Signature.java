@@ -3,28 +3,28 @@
  */
 package im.nll.data.play.controllers.interceptor;
 
-import static consts.FirstP2pConsts.CONF_HTTP_PATH;
 
-import org.apache.commons.lang3.StringUtils;
+import im.nll.data.play.controllers.BaseController;
+import im.nll.data.play.models.KeyPair;
+import im.nll.data.play.models.ObjectId;
+import im.nll.data.play.models.api.v1.Error;
+import im.nll.data.play.models.api.v1.ErrorCode;
+import im.nll.data.play.utils.Logs;
+import im.nll.data.play.utils.SignatureUtil;
+import org.apache.commons.lang.StringUtils;
 import org.joda.time.DateTime;
+import play.Logger;
+import play.Play;
+import play.libs.Codec;
+import play.mvc.Before;
 
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.crypto.Cipher;
-import javax.crypto.spec.SecretKeySpec;
-import controllers.BaseController;
-import models.KeyPair;
-import models.ObjectId;
-import models.api.v1.ErrorCode;
-import play.Logger;
-import play.Play;
-import play.libs.Codec;
-import play.mvc.Before;
-import utils.Logs;
-import utils.open.SignatureUtil;
 
 /**
  * validate message signature
@@ -38,7 +38,7 @@ public class Signature extends BaseController {
     //保留参数
     private static List<String> unSignParams = new ArrayList<>();
     //因为我们设置了http path，所以有一些其他的前缀，但是安硕签名的时候，没有这些前缀，从v1开始算path进行签名
-    private static String httpPath = Play.configuration.getProperty(CONF_HTTP_PATH,"");
+    private static String httpPath = Play.configuration.getProperty("http.path", "");
 
     static {
         unSignParams.add("signature");
@@ -108,8 +108,9 @@ public class Signature extends BaseController {
                     }
                 }
                 //XXX 这里算签名的时候，去掉我们的自定义路径,从v1开始
-                String requestPath = StringUtils.substringAfter(request.path,httpPath);
-                String resignature = SignatureUtil.computeSignature(keyPair.getSecretKey(), request.method, requestPath, toSignMap);
+                String requestPath = StringUtils.substringAfter(request.path, httpPath);
+                String resignature = SignatureUtil
+                        .computeSignature(keyPair.getSecretKey(), request.method, requestPath, toSignMap);
                 Logger.debug("compute signature %s", resignature);
                 if (resignature.equalsIgnoreCase(signature)) {
                     params.put("client_id", clientId);
@@ -143,7 +144,10 @@ public class Signature extends BaseController {
      */
     public static byte[] decryptAES(String value) {
         try {
-            byte[] ex = Play.configuration.getProperty("application.open.secret").substring(0, 16).getBytes("UTF-8");
+            byte[]
+                    ex =
+                    Play.configuration.getProperty("application.open.secret").substring(0, 16)
+                            .getBytes("UTF-8");
             SecretKeySpec skeySpec = new SecretKeySpec(ex, "AES");
             Cipher cipher = Cipher.getInstance("AES");
             cipher.init(2, skeySpec);

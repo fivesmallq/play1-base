@@ -1,12 +1,12 @@
 package im.nll.data.play.controllers.interceptor;
 
 import com.alibaba.fastjson.JSONException;
-
-import controllers.BaseController;
-import models.api.v1.ErrorCode;
+import im.nll.data.play.controllers.BaseController;
+import im.nll.data.play.models.api.v1.Error;
+import im.nll.data.play.models.api.v1.ErrorCode;
+import im.nll.data.play.utils.Logs;
 import play.Play;
 import play.mvc.Catch;
-import utils.Logs;
 
 /**
  * @author <a href="mailto:yongxiaozhao@gmail.com">zhaoxiaoyong</a>

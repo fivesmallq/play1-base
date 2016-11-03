@@ -1,8 +1,7 @@
 package im.nll.data.play.controllers.interceptor;
 
-import org.apache.commons.lang3.StringUtils;
-
-import base.RequestId;
+import im.nll.data.play.controllers.RequestId;
+import org.apache.commons.lang.StringUtils;
 import play.mvc.Controller;
 import play.mvc.Finally;
 
@@ -11,7 +10,7 @@ import play.mvc.Finally;
  */
 public class APIResponseWrapper extends Controller {
 
-    @Finally(unless = "v1.firstp2p.Auth.callback")
+    @Finally
     static void headers() {
         //set default content type
         response.contentType="application/json; charset=utf-8";

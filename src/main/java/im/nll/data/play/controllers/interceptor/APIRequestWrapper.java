@@ -1,7 +1,7 @@
 package im.nll.data.play.controllers.interceptor;
 
-import base.RequestId;
-import models.ObjectId;
+import im.nll.data.play.controllers.RequestId;
+import im.nll.data.play.models.ObjectId;
 import play.mvc.Before;
 import play.mvc.Controller;
 import play.mvc.Http;
