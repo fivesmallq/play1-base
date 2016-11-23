@@ -16,6 +16,7 @@
 
 package im.nll.data.play.models;
 
+import im.nll.data.play.utils.Logs;
 import org.slf4j.Logger;
 
 import java.io.Serializable;
@@ -26,7 +27,6 @@ import java.security.SecureRandom;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.concurrent.atomic.AtomicInteger;
-import utils.Logs;
 
 /**
  * <p>A globally unique identifier for objects.</p>

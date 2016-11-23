@@ -1,6 +1,7 @@
 package im.nll.data.play.models.api.v1;
 
-import models.Jsonable;
+
+import im.nll.data.play.models.Jsonable;
 
 /**
  * @author <a href="mailto:fivesmallq@gmail.com">fivesmallq</a>
