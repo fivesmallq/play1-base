@@ -1,0 +1,12 @@
+# Application dependencies
+
+require:
+    - play
+    - api -> api 0.1
+
+repositories:
+    - local-modules:
+          type: local
+          artifact: ${application.path}/../[module]
+          contains:
+            - api
