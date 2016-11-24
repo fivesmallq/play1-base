@@ -1,4 +1,4 @@
-package im.nll.data.play.utils;
+package utils;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
