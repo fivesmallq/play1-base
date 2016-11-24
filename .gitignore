@@ -44,6 +44,7 @@ server.pid
 *.iml
 *.eml
 /dist/
+/api/dist/
 .cache
 
 

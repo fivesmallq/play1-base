@@ -37,7 +37,7 @@ public class Signature extends BaseController {
     public static final String DEFAULT_SIGNATURE_VERSION = "1";
     //保留参数
     private static List<String> unSignParams = new ArrayList<>();
-    //因为我们设置了http path，所以有一些其他的前缀，但是安硕签名的时候，没有这些前缀，从v1开始算path进行签名
+    //因为我们设置了http path，所以有一些其他的前缀， 但是有些应用签名的时候，没有这些前缀，从v1开始算path进行签名
     private static String httpPath = Play.configuration.getProperty("http.path", "");
 
     static {
@@ -45,7 +45,7 @@ public class Signature extends BaseController {
         unSignParams.add("body");
     }
 
-    @Before(only = "v1.Loans.loanApplyStatusNotify")
+    @Before
     static void validate() {
         Error error = new Error();
         String signature = request.params.get("signature");
