@@ -1,10 +1,12 @@
 package controllers;
 
 import controllers.api.API;
+import play.data.validation.Required;
+import play.data.validation.URL;
 
 public class Application extends API {
 
-    public static void index() {
+    public static void index(@Required @URL String id) {
         renderJSON("\n" +
                 "{\n" +
                 "  \"login\": \"fivesmallq\",\n" +

@@ -6,3 +6,6 @@
 # ~~~~
 
 GET     /?                      api.API.index
+
+# Catch all
+*       /.*                     Application.notFoundPage

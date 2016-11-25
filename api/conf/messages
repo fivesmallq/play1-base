@@ -3,3 +3,27 @@
 # For exemple, for french create a messages.fr file
 
 #api.name=api
+# Validation messages
+validation.required=%s is Required
+validation.minSize=Minimum size is %2$d
+validation.maxSize=Maximum size is %2$d
+validation.email=Invalid email address
+validation.range=Not in the range %2$d through %3$d
+validation.min=%s cannot be lower than %2$d
+validation.max=%s cannot be greater than %2$d
+validation.match=%s Must match %2$s
+validation.isTrue=Must be checked
+validation.equals=Must be equal to &{%2$s}
+validation.invalid=Incorrect value
+validation.future=Must be in the future
+validation.after=Must be after %2$s
+validation.past=Must be in the past
+validation.before=Must be before %2$s
+validation.object=Validation failed
+validation.notFound=Object not found for id %2$s
+validation.url=%s is not a valid URL
+validation.phone=%s is not a valid phone
+validation.ipv4=Not a valid IP address
+validation.ipv6=Not a valid IP v6 address
+validation.unique=Must be unique
+validation.mobilephone=手机号码格式错误

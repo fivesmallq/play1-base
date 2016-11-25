@@ -17,7 +17,7 @@ public class Gzip extends Controller {
 
     static {
         String prop = Play.configuration.getProperty(
-                "gzip.API", "true");
+                "gzip.api", "true");
         gzipDisabled = Boolean.parseBoolean(prop);
     }
 

@@ -32,6 +32,6 @@ public class ExceptionCatcher extends BaseController {
         if (Play.mode.isDev())
             error.setDetailWithExecption(throwable);
         request.format = "json";
-        throw new play.mvc.results.Error(error.toPrettyJson());
+        error(error);
     }
 }
