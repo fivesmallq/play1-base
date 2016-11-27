@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <appender name="console" class="org.apache.log4j.ConsoleAppender">
+        <layout class="play.modules.logger.ExtendedPatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy.MM.dd HH:mm:ss,SSS} %-5p %c{1} - %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="levelMin" value="debug"/>
+            <param name="levelMax" value="error"/>
+            <param name="AcceptOnMatch" value="true"/>
+        </filter>
+    </appender>
+    <appender name="request" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="logs/request.log"/>
+        <layout class="play.modules.logger.ExtendedPatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy.MM.dd HH:mm:ss,SSS Z} %h [%R] %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="general" class="play.modules.logger.PlayPreprocessingRollingFileAppender">
+        <param name="file" value="logs/general.log"/>
+        <layout class="play.modules.logger.ExtendedPatternLayout">
+            <param name="ConversionPattern"
+                   value="%d{yyyy.MM.dd HH:mm:ss,SSS Z} [%R] %-5p %c{1} - %m%n"/>
+        </layout>
+    </appender>
+    <appender name="info" class="play.modules.logger.PlayPreprocessingRollingFileAppender">
+        <param name="file" value="logs/info.log"/>
+        <layout class="play.modules.logger.ExtendedPatternLayout">
+            <param name="ConversionPattern"
+                   value="%d{yyyy.MM.dd HH:mm:ss,SSS Z} [%R] %-5p %c{1} - %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="levelMin" value="info"/>
+            <param name="levelMax" value="info"/>
+            <param name="AcceptOnMatch" value="true"/>
+        </filter>
+    </appender>
+
+    <appender name="warn" class="play.modules.logger.PlayPreprocessingRollingFileAppender">
+        <param name="file" value="logs/warn.log"/>
+        <layout class="play.modules.logger.ExtendedPatternLayout">
+            <param name="ConversionPattern"
+                   value="%d{yyyy.MM.dd HH:mm:ss,SSS Z} [%R] %-5p %c{1} - %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="levelMin" value="warn"/>
+            <param name="levelMax" value="warn"/>
+            <param name="AcceptOnMatch" value="true"/>
+        </filter>
+    </appender>
+    <appender name="error" class="play.modules.logger.PlayPreprocessingRollingFileAppender">
+        <param name="file" value="logs/error.log"/>
+        <layout class="play.modules.logger.ExtendedPatternLayout">
+            <param name="ConversionPattern"
+                   value="%d{yyyy.MM.dd HH:mm:ss,SSS Z} [%R] %-5p %c{1} - %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="levelMin" value="error"/>
+            <param name="levelMax" value="error"/>
+            <param name="AcceptOnMatch" value="true"/>
+        </filter>
+    </appender>
+
+    <appender name="app_crash" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="logs/app_crash.log"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d: %m%n"/>
+        </layout>
+    </appender>
+    <logger name="request" additivity="false">
+        <appender-ref ref="request"/>
+    </logger>
+    <logger name="app_crash" additivity="true">
+        <appender-ref ref="app_crash"/>
+    </logger>
+    <root>
+        <level value="INFO"/>
+        <appender-ref ref="general"/>
+        <appender-ref ref="info"/>
+        <appender-ref ref="warn"/>
+        <appender-ref ref="error"/>
+        <appender-ref ref="console"/>
+    </root>
+</log4j:configuration>

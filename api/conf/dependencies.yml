@@ -6,3 +6,15 @@ require:
     - com.alibaba -> fastjson 1.1.40:
        transitive: false
     - com.auth0 -> java-jwt 2.2.0
+    - play-codeborne -> logger 2.1
+repositories:
+    - fi2cloud:
+        type: iBiblio
+        root: "http://repository.fit2cloud.com/content/groups/public/"
+        contains:
+            - com.fit2cloud.qingcloud -> *
+    - play-logger:
+          type: http
+          artifact: https://repo.codeborne.com/play-logger/logger-2.1.zip
+          contains:
+            - play-codeborne -> *
