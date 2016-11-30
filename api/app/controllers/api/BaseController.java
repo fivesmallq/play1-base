@@ -4,6 +4,7 @@ import controllers.api.response.Created;
 import controllers.api.response.EvilRequest;
 import controllers.api.response.NoContent;
 import controllers.api.response.Unauthorized;
+import models.api.Jsonable;
 import models.api.v1.Error;
 import models.api.v1.ErrorCode;
 import org.apache.commons.lang.StringUtils;
@@ -46,6 +47,13 @@ public class BaseController extends Controller {
                 badRequest(Error.client(error.message()));
             }
         }
+    }
+
+    /**
+     * Render object with json format.
+     */
+    protected static void renderJSON(Object data) {
+        renderJSON(Jsonable.toPrettyJson(data));
     }
 
     /**

@@ -3,7 +3,6 @@ package controllers;
 import com.alibaba.fastjson.JSON;
 import controllers.api.API;
 import models.User;
-import models.api.Jsonable;
 import play.data.validation.Min;
 import play.data.validation.Required;
 
@@ -32,7 +31,7 @@ public class Users extends API {
     public static void get(@Required @Min(1) Long id) {
         User user = users.get(id);
         if (user != null) {
-            renderJSON(user.toPrettyJson());
+            renderJSON(user);
         } else {
             notFoundBy(id);
         }
@@ -40,12 +39,12 @@ public class Users extends API {
 
     public static void create(@Required String body) {
         User user = JSON.parseObject(body, User.class);
-        users.put(111L,user);
+        users.put(111L, user);
         created(user);
     }
 
     public static void list() {
-        renderJSON(Jsonable.toPrettyJson(users.values()));
+        renderJSON(users.values());
     }
 
     private static User randomUser() {
