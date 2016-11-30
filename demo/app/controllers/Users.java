@@ -1,12 +1,11 @@
 package controllers;
 
+import com.alibaba.fastjson.JSON;
 import controllers.api.API;
-import controllers.api.interceptor.Secure;
 import models.User;
 import models.api.Jsonable;
 import play.data.validation.Min;
 import play.data.validation.Required;
-import play.mvc.With;
 
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -20,7 +19,6 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @date 16/11/24 下午11:45
  */
 
-@With(Secure.class)
 public class Users extends API {
     private static final AtomicInteger counter = new AtomicInteger(1);
     private static Map<Long, User> users = new LinkedHashMap<>();
@@ -38,6 +36,12 @@ public class Users extends API {
         } else {
             notFoundBy(id);
         }
+    }
+
+    public static void create(@Required String body) {
+        User user = JSON.parseObject(body, User.class);
+        users.put(111L,user);
+        created(user);
     }
 
     public static void list() {
