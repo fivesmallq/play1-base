@@ -2,6 +2,7 @@ package models;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import models.api.Jsonable;
+import play.data.validation.Required;
 
 import java.util.Date;
 
@@ -12,8 +13,10 @@ import java.util.Date;
  */
 public class User implements Jsonable {
     public Long id;
+    @Required
     public String userName;
     @JSONField(serialize = false)
+    @Required
     public String password;
     public Date createDate;
     public Integer state;

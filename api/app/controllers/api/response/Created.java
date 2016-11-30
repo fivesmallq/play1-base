@@ -23,7 +23,7 @@ public class Created extends Status {
     public void apply(Http.Request request, Http.Response response) {
         response.status = Http.StatusCode.CREATED;
         try {
-            response.out.write(json.getBytes());
+            response.out.write(json.getBytes("UTF-8"));
         } catch (IOException e) {
             throw new UnexpectedException(e);
         }

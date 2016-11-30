@@ -1,6 +1,5 @@
 package controllers;
 
-import com.alibaba.fastjson.JSON;
 import controllers.api.API;
 import models.User;
 import play.data.validation.Min;
@@ -37,8 +36,8 @@ public class Users extends API {
         }
     }
 
-    public static void create(@Required String body) {
-        User user = JSON.parseObject(body, User.class);
+    public static void create() {
+        User user = readBody(User.class);
         users.put(111L, user);
         created(user);
     }
