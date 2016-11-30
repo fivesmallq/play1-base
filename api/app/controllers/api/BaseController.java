@@ -51,9 +51,9 @@ public class BaseController extends Controller {
     /**
      * Send a 201 Created
      */
-    protected static void created() {
+    protected static void created(Object data) {
         request.format = "json";
-        throw new Created();
+        throw new Created(data);
     }
 
     /**

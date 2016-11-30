@@ -22,7 +22,7 @@ public interface Jsonable extends Serializable {
 
     PropertyFilter filter = (source, name, value) -> {
         //不输出关键字段
-        if ("entityId".equals(name) || "persistent".equals(name) || "password".equals(name) || "salt".equals(name)) {
+        if ("entityId".equals(name) || "persistent".equals(name)) {
             return false;
         }
         return true;

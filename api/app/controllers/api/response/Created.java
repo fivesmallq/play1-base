@@ -1,7 +1,11 @@
 package controllers.api.response;
 
+import com.alibaba.fastjson.JSON;
+import play.exceptions.UnexpectedException;
 import play.mvc.Http;
 import play.mvc.results.Status;
+
+import java.io.IOException;
 
 /**
  * @author <a href="mailto:fivesmallq@gmail.com">fivesmallq</a>
@@ -9,7 +13,19 @@ import play.mvc.results.Status;
  * @date 16/9/3 下午5:01
  */
 public class Created extends Status {
-    public Created() {
+    String json;
+    public Created(Object data) {
         super(Http.StatusCode.CREATED);
+        this.json=JSON.toJSONString(data);
+    }
+
+    @Override
+    public void apply(Http.Request request, Http.Response response) {
+        response.status = Http.StatusCode.CREATED;
+        try {
+            response.out.write(json.getBytes());
+        } catch (IOException e) {
+            throw new UnexpectedException(e);
+        }
     }
 }
