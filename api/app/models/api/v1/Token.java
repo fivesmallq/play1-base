@@ -10,7 +10,7 @@ import models.api.Jsonable;
  */
 public class Token implements Jsonable {
     public String token;
-    public Long userId;
+    public String userId;
     public String userName;
 
     public Token(String token) {
