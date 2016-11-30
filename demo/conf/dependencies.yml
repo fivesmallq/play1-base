@@ -2,14 +2,14 @@
 
 require:
     - play
-    - play-api -> api 0.1
+    - play1-base -> api 0.1
     - play-codeborne -> logger 2.1
 repositories:
     - local-modules:
           type: local
           artifact: ${application.path}/../[module]
           contains:
-            - play-api -> *
+            - play1-base -> *
     - play-logger:
           type: http
           artifact: https://repo.codeborne.com/play-logger/logger-2.1.zip
