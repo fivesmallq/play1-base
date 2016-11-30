@@ -3,10 +3,15 @@
 require:
     - play
     - api -> api 0.1
-
+    - play-codeborne -> logger 2.1
 repositories:
     - local-modules:
           type: local
           artifact: ${application.path}/../[module]
           contains:
             - api
+    - play-logger:
+          type: http
+          artifact: https://repo.codeborne.com/play-logger/logger-2.1.zip
+          contains:
+            - play-codeborne -> *

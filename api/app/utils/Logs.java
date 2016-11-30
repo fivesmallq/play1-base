@@ -10,6 +10,7 @@ package utils;
 import controllers.api.RequestId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import play.Play;
 import play.mvc.Scope;
 
 
@@ -69,7 +70,7 @@ public class Logs {
             sessionId = Scope.Session.current().getId();
         }
         String requestId = RequestId.getId();
-        if (session != null && StringUtils.isNotNullOrEmpty(sessionId) && StringUtils
+        if (Play.mode.isProd() && session != null && StringUtils.isNotNullOrEmpty(sessionId) && StringUtils
                 .isNotNullOrEmpty(requestId)) {
 
             StringBuffer buffer = new StringBuffer(20).append("request-id:").append(requestId).append(" session:").append(sessionId).append(" ").append(s);

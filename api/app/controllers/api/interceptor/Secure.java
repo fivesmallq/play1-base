@@ -6,7 +6,6 @@ import controllers.api.BaseController;
 import models.api.v1.Error;
 import models.api.v1.ErrorCode;
 import org.apache.commons.lang.StringUtils;
-import play.Play;
 import play.mvc.Before;
 import play.mvc.Http;
 import utils.JWTUtils;
@@ -23,28 +22,26 @@ import java.util.Map;
 public class Secure extends BaseController {
     @Before(unless = {"v1.Auth.auth"})
     static void checkAccess() {
-        if (Play.mode.isProd()) {
-            Error error = new Error();
+        Error error = new Error();
+        error.setCodeWithDefaultMsg(ErrorCode.CLIENT_AUTH_ERROR);
+        Http.Header header = request.headers.get("authorization");
+        if (header == null || StringUtils.isEmpty(header.value())) {
+            error.setCodeWithDefaultMsg(ErrorCode.CLIENT_ACCESS_DENIED);
+            unauthorized(error);
+        }
+        String auth = header.value();
+        try {
+            final Map<String, Object> claims = JWTUtils.verify(auth);
+            String id = String.valueOf(claims.get("id"));
+            session.put("id", id);
+            request.args.put("requestLogCustomData", "[USER-" + id + "]");
+        } catch (Exception e) {
+            if (e instanceof JWTExpiredException) {
+                error.setCodeWithDefaultMsg(ErrorCode.CLIENT_AUTH_TOKEN_EXPIRED);
+                unauthorized(error);
+            }
             error.setCodeWithDefaultMsg(ErrorCode.CLIENT_AUTH_ERROR);
-            Http.Header header = request.headers.get("authorization");
-            if (header == null || StringUtils.isEmpty(header.value())) {
-                error.setCodeWithDefaultMsg(ErrorCode.CLIENT_ACCESS_DENIED);
-                unauthorized(error);
-            }
-            String auth = header.value();
-            try {
-                final Map<String, Object> claims = JWTUtils.verify(auth);
-                String id = String.valueOf(claims.get("id"));
-                session.put("id", id);
-                request.args.put("requestLogCustomData", "[USER-" + id + "]");
-            } catch (Exception e) {
-                if (e instanceof JWTExpiredException) {
-                    error.setCodeWithDefaultMsg(ErrorCode.CLIENT_AUTH_TOKEN_EXPIRED);
-                    unauthorized(error);
-                }
-                error.setCodeWithDefaultMsg(ErrorCode.CLIENT_AUTH_ERROR);
-                unauthorized(error);
-            }
+            unauthorized(error);
         }
     }
 }

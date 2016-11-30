@@ -1,9 +1,12 @@
 package controllers;
 
 import controllers.api.API;
+import controllers.api.interceptor.Secure;
 import models.User;
+import models.api.Jsonable;
 import play.data.validation.Min;
 import play.data.validation.Required;
+import play.mvc.With;
 
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -16,6 +19,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @version Revision: 1.0
  * @date 16/11/24 下午11:45
  */
+
+@With(Secure.class)
 public class Users extends API {
     private static final AtomicInteger counter = new AtomicInteger(1);
     private static Map<Long, User> users = new LinkedHashMap<>();
@@ -33,6 +38,10 @@ public class Users extends API {
         } else {
             notFoundBy(id);
         }
+    }
+
+    public static void list() {
+        renderJSON(Jsonable.toPrettyJson(users.values()));
     }
 
     private static User randomUser() {

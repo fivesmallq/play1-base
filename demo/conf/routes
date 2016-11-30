@@ -13,5 +13,6 @@ GET     /favicon.ico                            404
 GET     /public/                                staticDir:public
 
 GET     /v1/users/{id}                          Users.get
+GET     /v1/users                               Users.list
 
 *       /.*                                     api.API.notFoundPage

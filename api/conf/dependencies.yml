@@ -2,17 +2,13 @@ self: play -> api 0.1
 
 require:
     - play
-    - com.google.guava -> guava 18.0
-    - com.alibaba -> fastjson 1.1.40:
+    - com.google.guava -> guava 20.0:
+       transitive: false
+    - com.alibaba -> fastjson 1.2.21:
        transitive: false
     - com.auth0 -> java-jwt 2.2.0
     - play-codeborne -> logger 2.1
 repositories:
-    - fi2cloud:
-        type: iBiblio
-        root: "http://repository.fit2cloud.com/content/groups/public/"
-        contains:
-            - com.fit2cloud.qingcloud -> *
     - play-logger:
           type: http
           artifact: https://repo.codeborne.com/play-logger/logger-2.1.zip
