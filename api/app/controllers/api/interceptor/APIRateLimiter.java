@@ -36,7 +36,7 @@ public class APIRateLimiter extends BaseController {
             Http.Header header = request.headers.get("authorization");
             String key;
             if (header != null && StringUtils.isNotEmpty(header.value())) {
-                key = header.value();
+                key = StringUtils.substringAfter(header.value(), "Bearer").trim();
             } else {
                 String ip = request.remoteAddress;
                 if (StringUtils.isNotEmpty(ip) && !ip.startsWith("10.") && !ip.startsWith("192.")) {

@@ -29,7 +29,7 @@ public class Secure extends BaseController {
             error.setCodeWithDefaultMsg(ErrorCode.CLIENT_ACCESS_DENIED);
             unauthorized(error);
         }
-        String auth = header.value();
+        String auth = StringUtils.substringAfter(header.value(), "Bearer").trim();
         try {
             final Map<String, Object> claims = JWTUtils.verify(auth);
             String id = String.valueOf(claims.get("id"));
