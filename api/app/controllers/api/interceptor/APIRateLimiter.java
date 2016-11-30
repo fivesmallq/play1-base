@@ -39,7 +39,7 @@ public class APIRateLimiter extends BaseController {
                 key = header.value();
             } else {
                 String ip = request.remoteAddress;
-                if (StringUtils.isNotEmpty(ip) || !ip.startsWith("10.") || !ip.startsWith("192.")) {
+                if (StringUtils.isNotEmpty(ip) && !ip.startsWith("10.") && !ip.startsWith("192.")) {
                     //只返回第一个ip
                     ip = Splitter.on(",").trimResults().omitEmptyStrings().split(ip).iterator().next();
                 } else {
