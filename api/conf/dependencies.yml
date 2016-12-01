@@ -6,4 +6,5 @@ require:
        transitive: false
     - com.alibaba -> fastjson 1.2.21:
        transitive: false
-    - com.auth0 -> java-jwt 2.2.0
+    - com.auth0 -> java-jwt 2.2.0:
+       transitive: false
