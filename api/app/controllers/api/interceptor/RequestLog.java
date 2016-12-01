@@ -17,10 +17,12 @@ public class RequestLog extends Controller {
         if (Utility.skip(RequestLog.class, request)) {
             return;
         }
-        if (request.params._contains("debug")) {
-            Logs.info("request:[{}] params:[{}] headers:[{}]", request.method + ":" + request.url, params.allSimple(), request.headers);
-        } else {
-            Logs.info("request:[{}] params:[{}]", request.method + ":" + request.url, params.allSimple());
+        if (Utility.requestLog()) {
+            if (request.params._contains("debug")) {
+                Logs.info("request:[{}] params:[{}] headers:[{}]", request.method + ":" + request.url, params.allSimple(), request.headers);
+            } else {
+                Logs.info("request:[{}] params:[{}]", request.method + ":" + request.url, params.allSimple());
+            }
         }
     }
 

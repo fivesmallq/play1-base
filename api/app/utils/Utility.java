@@ -46,4 +46,8 @@ public class Utility {
     public static boolean secure() {
         return prop.getBooleanProperty("api.secure", true);
     }
+
+    public static boolean requestLog() {
+        return prop.getBooleanProperty("api.request.log", true);
+    }
 }
