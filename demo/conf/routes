@@ -12,8 +12,8 @@ GET     /favicon.ico                            404
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
 
-GET     /v1/users/{id}                          Users.get
-GET     /v1/users                               Users.list
-POST    /v1/users                               Users.create
-
+GET     /v1/users/{id}                          v1.Users.get
+GET     /v1/users                               v1.Users.list
+POST    /v1/users                               v1.Users.save
+POST    /v1/auth                                v1.Auth.auth
 *       /.*                                     api.API.notFoundPage

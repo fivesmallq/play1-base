@@ -3,7 +3,6 @@ package utils;
 import com.auth0.jwt.JWTSigner;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.JWTVerifyException;
-import models.api.BaseModel;
 import play.Play;
 
 import java.io.IOException;
@@ -22,13 +21,13 @@ public class JWTUtils {
     public static String secret = Play.configuration.getProperty("application.secret");
     public static String tokenExp = Play.configuration.getProperty("token.exp", "3600");
 
-    public static String sign(BaseModel user) {
+    public static String sign(Object id) {
         final long iat = System.currentTimeMillis() / 1000l; // issued at claim
         final long exp = iat + Long.valueOf(tokenExp); // expires claim. In this case the token expires in 60 * 60 seconds
 
         final JWTSigner signer = new JWTSigner(secret);
         final HashMap<String, Object> claims = new HashMap<>();
-        claims.put("id", user.id);
+        claims.put("id", id);
         claims.put("exp", exp);
         claims.put("iat", iat);
         final String jwt = signer.sign(claims);

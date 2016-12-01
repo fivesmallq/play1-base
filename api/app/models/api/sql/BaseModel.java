@@ -1,6 +1,7 @@
-package models.api;
+package models.api.sql;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import models.api.Jsonable;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;

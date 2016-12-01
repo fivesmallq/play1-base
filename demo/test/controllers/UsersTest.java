@@ -1,14 +1,15 @@
 package controllers;
 
 import com.alibaba.fastjson.JSON;
+import controllers.dto.UserDto;
 import models.User;
 import models.api.Jsonable;
 import models.api.v1.Error;
-import models.api.v1.ErrorCode;
 import org.junit.Test;
 import play.mvc.Http;
 import play.test.FunctionalTest;
 
+import static play.mvc.Http.StatusCode.BAD_REQUEST;
 import static play.mvc.Http.StatusCode.CREATED;
 
 /**
@@ -16,7 +17,7 @@ import static play.mvc.Http.StatusCode.CREATED;
  * @version Revision: 1.0
  * @date 16/11/30 下午4:47
  */
-public class UsersTest extends FunctionalTest{
+public class UsersTest extends FunctionalTest {
     @Test
     public void get() throws Exception {
 
@@ -24,10 +25,16 @@ public class UsersTest extends FunctionalTest{
 
     @Test
     public void create() throws Exception {
-        User user=new User();
-        user.userName="test-create";
-        user.password="password";
+        UserDto user = new UserDto();
+        user.userName = "test-create";
         Http.Response response = POST("/v1/users", "application/json", JSON.toJSONString(user));
+        System.out.println(response.out.toString());
+        assertStatus(BAD_REQUEST, response);
+        Error error = Jsonable.fromJson(response.out.toString(), Error.class);
+        assertEquals("entity.password is Required", error.getMessage());
+
+        user.password = "password";
+        response = POST("/v1/users", "application/json", JSON.toJSONString(user));
         System.out.println(response.out.toString());
         assertStatus(CREATED, response);
         User ret = Jsonable.fromJson(response.out.toString(), User.class);

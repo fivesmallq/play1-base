@@ -1,5 +1,7 @@
 package models.api;
 
+import models.api.sql.BaseModel;
+
 import javax.persistence.Entity;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;

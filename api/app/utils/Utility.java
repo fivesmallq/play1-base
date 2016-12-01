@@ -13,7 +13,7 @@ public class Utility {
     private static String[] EMPTY_ARRAY = new String[0];
 
     public static boolean skip(Class interceptor, Http.Request request) {
-        boolean skip = true;
+        boolean skip = false;
         String[] unless = prop.getStringArrayProperty(interceptor.getSimpleName() + ".unless", EMPTY_ARRAY);
         String[] only = prop.getStringArrayProperty(interceptor.getSimpleName() + ".only", EMPTY_ARRAY);
         for (String un : only) {
