@@ -17,6 +17,7 @@ import play.libs.Codec;
 import play.mvc.Before;
 import utils.Logs;
 import utils.SignatureUtil;
+import utils.Utility;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
@@ -47,6 +48,9 @@ public class Signature extends BaseController {
 
     @Before
     static void validate() {
+        if (Utility.skip(Signature.class, request)) {
+            return;
+        }
         Error error = new Error();
         String signature = request.params.get("signature");
         String signature_version = request.params.get("signature_version");

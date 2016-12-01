@@ -9,6 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import play.mvc.Before;
 import play.mvc.Http;
 import utils.JWTUtils;
+import utils.Utility;
 
 import java.util.Map;
 
@@ -20,8 +21,11 @@ import java.util.Map;
  * @date 15/4/27 下午5:38
  */
 public class Secure extends BaseController {
-    @Before(unless = {"v1.Auth.auth"})
+    @Before
     static void checkAccess() {
+        if (Utility.skip(Secure.class, request)) {
+            return;
+        }
         Error error = new Error();
         error.setCodeWithDefaultMsg(ErrorCode.CLIENT_AUTH_ERROR);
         Http.Header header = request.headers.get("authorization");
