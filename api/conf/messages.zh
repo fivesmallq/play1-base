@@ -1,0 +1,2 @@
+validation.required=缺少字段%s
+validation.mobilephone=手机号码格式错误
