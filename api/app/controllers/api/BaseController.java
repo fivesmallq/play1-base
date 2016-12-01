@@ -8,12 +8,13 @@ import models.api.Jsonable;
 import models.api.v1.Error;
 import models.api.v1.ErrorCode;
 import org.apache.commons.lang.StringUtils;
-import play.Play;
 import play.mvc.Before;
 import play.mvc.Controller;
 import play.mvc.results.BadRequest;
 import play.mvc.results.Forbidden;
 import play.mvc.results.NotFound;
+import utils.Logs;
+import utils.Utility;
 
 /**
  * @author <a href="mailto:yongxiaozhao@gmail.com">zhaoxiaoyong</a>
@@ -135,9 +136,12 @@ public class BaseController extends Controller {
      *
      * @param userId
      */
-    protected static void forbidden(Long userId) {
-        if (Play.mode.isProd()) {
+    protected static void forbidden(Object userId) {
+        if (Utility.forbidden()) {
             String currentId = session.get("id");
+            if (utils.StringUtils.isNullOrEmpty(currentId)) {
+                Logs.error("current id is empty. @Secure must be annotationed at class: [{}]", request.controller);
+            }
             if (StringUtils.isNotEmpty(currentId) && !currentId.equals(String.valueOf(userId))) {
                 Error error = new Error();
                 error.setCodeWithDefaultMsg(ErrorCode.CLIENT_ACCESS_DENIED);

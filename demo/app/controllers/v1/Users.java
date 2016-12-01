@@ -1,11 +1,9 @@
 package controllers.v1;
 
 import controllers.api.API;
-import controllers.api.interceptor.Secure;
 import models.User;
 import play.data.validation.Min;
 import play.data.validation.Required;
-import play.mvc.With;
 
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -18,7 +16,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @version Revision: 1.0
  * @date 16/11/24 下午11:45
  */
-@With({Secure.class})
+//@With({Secure.class})
 public class Users extends API {
     private static final AtomicInteger counter = new AtomicInteger(1);
     private static Map<Long, User> users = new LinkedHashMap<>();
@@ -30,7 +28,7 @@ public class Users extends API {
     }
 
     public static void get(@Required @Min(1) Long id) {
-        forbidden();
+        forbidden(id);
         User user = users.get(id);
         if (user != null) {
             renderJSON(user);

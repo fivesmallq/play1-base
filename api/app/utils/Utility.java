@@ -39,4 +39,11 @@ public class Utility {
         return skip;
     }
 
+    public static boolean forbidden() {
+        return prop.getBooleanProperty("api.forbidden", true);
+    }
+
+    public static boolean secure() {
+        return prop.getBooleanProperty("api.secure", true);
+    }
 }

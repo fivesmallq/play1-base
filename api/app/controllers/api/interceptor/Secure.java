@@ -26,26 +26,28 @@ public class Secure extends BaseController {
         if (Utility.skip(Secure.class, request)) {
             return;
         }
-        Error error = new Error();
-        error.setCodeWithDefaultMsg(ErrorCode.CLIENT_AUTH_ERROR);
-        Http.Header header = request.headers.get("authorization");
-        if (header == null || StringUtils.isEmpty(header.value())) {
-            error.setCodeWithDefaultMsg(ErrorCode.CLIENT_ACCESS_DENIED);
-            unauthorized(error);
-        }
-        String auth = StringUtils.substringAfter(header.value(), "Bearer").trim();
-        try {
-            final Map<String, Object> claims = JWTUtils.verify(auth);
-            String id = String.valueOf(claims.get("id"));
-            session.put("id", id);
-            request.args.put("requestLogCustomData", "[USER-" + id + "]");
-        } catch (Exception e) {
-            if (e instanceof JWTExpiredException) {
-                error.setCodeWithDefaultMsg(ErrorCode.CLIENT_AUTH_TOKEN_EXPIRED);
+        if (Utility.secure()) {
+            Error error = new Error();
+            error.setCodeWithDefaultMsg(ErrorCode.CLIENT_AUTH_ERROR);
+            Http.Header header = request.headers.get("authorization");
+            if (header == null || StringUtils.isEmpty(header.value())) {
+                error.setCodeWithDefaultMsg(ErrorCode.CLIENT_ACCESS_DENIED);
                 unauthorized(error);
             }
-            error.setCodeWithDefaultMsg(ErrorCode.CLIENT_AUTH_ERROR);
-            unauthorized(error);
+            String auth = StringUtils.substringAfter(header.value(), "Bearer").trim();
+            try {
+                final Map<String, Object> claims = JWTUtils.verify(auth);
+                String id = String.valueOf(claims.get("id"));
+                session.put("id", id);
+                request.args.put("requestLogCustomData", "[USER-" + id + "]");
+            } catch (Exception e) {
+                if (e instanceof JWTExpiredException) {
+                    error.setCodeWithDefaultMsg(ErrorCode.CLIENT_AUTH_TOKEN_EXPIRED);
+                    unauthorized(error);
+                }
+                error.setCodeWithDefaultMsg(ErrorCode.CLIENT_AUTH_ERROR);
+                unauthorized(error);
+            }
         }
     }
 }
