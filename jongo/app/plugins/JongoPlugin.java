@@ -19,7 +19,7 @@ import play.PlayPlugin;
 
 public class JongoPlugin extends PlayPlugin {
     //mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]
-    public static String mongoUri = Play.configuration.getProperty("mongo.input.uri",
+    public static String mongoUri = Play.configuration.getProperty("jongo.uri",
             "mongodb://127.0.0.1:27017/local");
     static DB db;
     static volatile Jongo jongo;

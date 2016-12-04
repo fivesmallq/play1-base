@@ -74,7 +74,7 @@ server.pid
 # .idea/gradle.xml
 # .idea/libraries
 
-# Mongo Explorer plugin:
+# Mongo Explorer plugins:
 # .idea/mongoSettings.xml
 
 ## File-based project format:
@@ -86,13 +86,13 @@ server.pid
 # IntelliJ
 /out/
 
-# mpeltonen/sbt-idea plugin
+# mpeltonen/sbt-idea plugins
 .idea_modules/
 
-# JIRA plugin
-atlassian-ide-plugin.xml
+# JIRA plugins
+atlassian-ide-plugins.xml
 
-# Crashlytics plugin (for Android Studio and IntelliJ)
+# Crashlytics plugins (for Android Studio and IntelliJ)
 com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
@@ -130,10 +130,10 @@ local.properties
 # PDT-specific
 .buildpath
 
-# sbteclipse plugin
+# sbteclipse plugins
 .target
 
-# TeXlipse plugin
+# TeXlipse plugins
 .texlipse
 
 log/
