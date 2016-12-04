@@ -1,6 +1,4 @@
-package models.api.v1;
-
-import models.api.Remark;
+package models.api;
 
 import java.lang.reflect.Field;
 import java.util.Hashtable;

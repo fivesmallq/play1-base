@@ -1,4 +1,4 @@
-package models.api.v1;
+package models.api;
 
 
 import models.api.Jsonable;
