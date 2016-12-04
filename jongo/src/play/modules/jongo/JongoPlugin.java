@@ -1,4 +1,4 @@
-package plugins;
+package play.modules.jongo;
 
 /**
  * api metrics
@@ -24,7 +24,7 @@ public class JongoPlugin extends PlayPlugin {
     static DB db;
     static volatile Jongo jongo;
      @Override
-     public void afterApplicationStart() {
+     public void onApplicationStart() {
          Logger.info("Starting JongoPlugin...");
          Logger.info("Connecting MongoDB %s",mongoUri);
         MongoClientURI mongoClientURI = new MongoClientURI(JongoPlugin.mongoUri);
@@ -44,6 +44,7 @@ public class JongoPlugin extends PlayPlugin {
         if (jongo != null)
         return jongo;
         else {
+
             throw new RuntimeException("JongoPlugin not ready");
         }
     }

@@ -1,4 +1,4 @@
-package models.jongo;
+package play.modules.jongo;
 
 
 import com.alibaba.fastjson.annotation.JSONField;
@@ -6,7 +6,7 @@ import org.bson.types.ObjectId;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 import org.jongo.marshall.jackson.oid.MongoId;
-import plugins.JongoPlugin;
+
 
 import java.util.Date;
 
