@@ -23,6 +23,20 @@ repositories:
             - play1-base -> *
 ```
 
+To add a dependency on jongo module. use the following:
+Add it to your ``dependencies.yml``
+```yaml
+require:
+    - play
+    - play1-base -> jongo 0.1
+repositories:
+    - play1-base:
+          type: http
+          artifact: http://play.nll.im/play-jongo/jongo-0.1.zip
+          contains:
+            - play1-base -> *
+```
+
 
 #Examples
 
