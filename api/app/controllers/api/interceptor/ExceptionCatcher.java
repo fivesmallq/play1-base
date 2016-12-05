@@ -2,8 +2,8 @@ package controllers.api.interceptor;
 
 import com.alibaba.fastjson.JSONException;
 import controllers.api.BaseController;
-import models.api.v1.Error;
-import models.api.v1.ErrorCode;
+import models.api.Error;
+import models.api.ErrorCode;
 import play.Play;
 import play.mvc.Catch;
 import utils.Logs;

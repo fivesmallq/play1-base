@@ -2,7 +2,7 @@ package controllers.v1;
 
 import controllers.api.API;
 import models.User;
-import models.api.v1.Token;
+import models.api.Token;
 import utils.JWTUtils;
 
 /**

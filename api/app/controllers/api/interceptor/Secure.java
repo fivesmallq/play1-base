@@ -3,8 +3,8 @@ package controllers.api.interceptor;
 
 import com.auth0.jwt.JWTExpiredException;
 import controllers.api.BaseController;
-import models.api.v1.Error;
-import models.api.v1.ErrorCode;
+import models.api.Error;
+import models.api.ErrorCode;
 import org.apache.commons.lang.StringUtils;
 import play.mvc.Before;
 import play.mvc.Http;

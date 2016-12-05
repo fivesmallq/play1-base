@@ -1,4 +1,4 @@
-package plugins;
+package play.modules.jongo;
 
 /**
  * api metrics
@@ -19,12 +19,12 @@ import play.PlayPlugin;
 
 public class JongoPlugin extends PlayPlugin {
     //mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]
-    public static String mongoUri = Play.configuration.getProperty("mongo.input.uri",
+    public static String mongoUri = Play.configuration.getProperty("jongo.uri",
             "mongodb://127.0.0.1:27017/local");
     static DB db;
     static volatile Jongo jongo;
      @Override
-     public void afterApplicationStart() {
+     public void onApplicationStart() {
          Logger.info("Starting JongoPlugin...");
          Logger.info("Connecting MongoDB %s",mongoUri);
         MongoClientURI mongoClientURI = new MongoClientURI(JongoPlugin.mongoUri);
@@ -44,6 +44,7 @@ public class JongoPlugin extends PlayPlugin {
         if (jongo != null)
         return jongo;
         else {
+
             throw new RuntimeException("JongoPlugin not ready");
         }
     }

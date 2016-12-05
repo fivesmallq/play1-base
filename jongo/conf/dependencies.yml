@@ -1,0 +1,8 @@
+self: play -> jongo 0.1
+
+require:
+    - play
+#    - com.google.code.maven-play-plugin.org.playframework -> play 1.4.2?
+    - org.jongo -> jongo 1.3.0
+    - com.alibaba -> fastjson 1.2.21:
+         transitive: false

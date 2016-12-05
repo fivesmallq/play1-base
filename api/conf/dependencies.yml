@@ -8,3 +8,12 @@ require:
        transitive: false
     - com.auth0 -> java-jwt 2.2.0:
        transitive: false
+    - play-codeborne -> logger 2.1
+repositories:
+    - play-logger:
+          type: http
+          artifact: https://repo.codeborne.com/play-logger/logger-2.1.zip
+          contains:
+            - play-codeborne -> *
+
+

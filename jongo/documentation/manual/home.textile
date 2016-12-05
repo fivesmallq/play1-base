@@ -17,6 +17,7 @@ p(note). Describe any installation that is required, beyond adding and resolving
 h2. Configuration
 
 p(note). List any configuration options that the module uses, with an @h3.@ heading for each one.
+"mongo.input.uri",            "mongodb://127.0.0.1:27017/local"
 
 h2. Usage
 

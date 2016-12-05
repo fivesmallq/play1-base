@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import controllers.dto.UserDto;
 import models.User;
 import models.api.Jsonable;
-import models.api.v1.Error;
+import models.api.Error;
 import org.junit.Test;
 import play.mvc.Http;
 import play.test.FunctionalTest;
