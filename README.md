@@ -16,11 +16,11 @@ require:
     - play
     - play1-base -> api 0.1
 repositories:
-    - play1-base:
+    - play-api:
           type: http
           artifact: http://play.nll.im/play-api/api-0.1.zip
           contains:
-            - play1-base -> *
+            - play1-base -> api
 ```
 
 To add a dependency on jongo module. use the following:
@@ -30,11 +30,11 @@ require:
     - play
     - play1-base -> jongo 0.1
 repositories:
-    - play1-base:
+    - play-jongo:
           type: http
           artifact: http://play.nll.im/play-jongo/jongo-0.1.zip
           contains:
-            - play1-base -> *
+            - play1-base -> jongo
 ```
 
 
