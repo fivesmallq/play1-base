@@ -27,7 +27,7 @@ public class JWTUtils {
 
         final JWTSigner signer = new JWTSigner(secret);
         final HashMap<String, Object> claims = new HashMap<>();
-        claims.put("id", id);
+        claims.put("aud", id);
         claims.put("exp", exp);
         claims.put("iat", iat);
         final String jwt = signer.sign(claims);

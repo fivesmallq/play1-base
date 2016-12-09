@@ -37,7 +37,7 @@ public class Secure extends BaseController {
             String auth = StringUtils.substringAfter(header.value(), "Bearer").trim();
             try {
                 final Map<String, Object> claims = JWTUtils.verify(auth);
-                String id = String.valueOf(claims.get("id"));
+                String id = String.valueOf(claims.get("aud"));
                 session.put("id", id);
                 request.args.put("requestLogCustomData", "[USER-" + id + "]");
             } catch (Exception e) {
