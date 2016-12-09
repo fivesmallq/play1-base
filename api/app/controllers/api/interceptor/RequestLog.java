@@ -1,9 +1,9 @@
 package controllers.api.interceptor;
 
+import controllers.api.Utility;
 import play.mvc.Before;
 import play.mvc.Controller;
 import utils.Logs;
-import utils.Utility;
 
 
 /**

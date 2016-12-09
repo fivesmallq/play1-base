@@ -4,9 +4,9 @@ import controllers.api.response.Created;
 import controllers.api.response.EvilRequest;
 import controllers.api.response.NoContent;
 import controllers.api.response.Unauthorized;
-import models.api.Jsonable;
 import models.api.Error;
 import models.api.ErrorCode;
+import models.api.Jsonable;
 import org.apache.commons.lang.StringUtils;
 import play.mvc.Before;
 import play.mvc.Controller;
@@ -14,7 +14,6 @@ import play.mvc.results.BadRequest;
 import play.mvc.results.Forbidden;
 import play.mvc.results.NotFound;
 import utils.Logs;
-import utils.Utility;
 
 /**
  * @author <a href="mailto:yongxiaozhao@gmail.com">zhaoxiaoyong</a>

@@ -1,7 +1,8 @@
-package utils;
+package controllers.api;
 
 import play.Play;
 import play.mvc.Http;
+import utils.PropertiesParser;
 
 /**
  * @author <a href="mailto:fivesmallq@gmail.com">fivesmallq</a>
