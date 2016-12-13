@@ -112,6 +112,12 @@ public class BaseController extends Controller {
         throw new NotFound(Error.notFoundBy(ids).toPrettyJson());
     }
 
+    protected static void forbidden(String message) {
+        Error error = new Error();
+        error.setCodeMsg(ErrorCode.CLIENT_ACCESS_DENIED, message);
+        request.format = "json";
+        forbidden(message);
+    }
     protected static void forbidden(Error error) {
         request.format = "json";
         throw new Forbidden(error.toPrettyJson());
@@ -135,7 +141,7 @@ public class BaseController extends Controller {
      *
      * @param userId
      */
-    protected static void forbidden(Object userId) {
+    protected static void forbiddenAccess(Object userId) {
         if (Utility.forbidden()) {
             String currentId = session.get("id");
             if (utils.StringUtils.isNullOrEmpty(currentId)) {
@@ -144,8 +150,7 @@ public class BaseController extends Controller {
             if (StringUtils.isNotEmpty(currentId) && !currentId.equals(String.valueOf(userId))) {
                 Error error = new Error();
                 error.setCodeWithDefaultMsg(ErrorCode.CLIENT_ACCESS_DENIED);
-                request.format = "json";
-                throw new Forbidden(error.toPrettyJson());
+                forbidden(error);
             }
         }
     }

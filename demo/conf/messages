@@ -27,3 +27,4 @@ validation.ipv4=Not a valid IP address
 validation.ipv6=Not a valid IP v6 address
 validation.unique=Must be unique
 validation.mobilephone=%s is not a valid mobile phone
+validation.mongoid=%s is not a valid id
