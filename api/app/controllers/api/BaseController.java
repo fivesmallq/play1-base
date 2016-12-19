@@ -13,7 +13,10 @@ import play.mvc.Controller;
 import play.mvc.results.BadRequest;
 import play.mvc.results.Forbidden;
 import play.mvc.results.NotFound;
+import utils.BeanMapper;
 import utils.Logs;
+
+import java.util.List;
 
 /**
  * @author <a href="mailto:yongxiaozhao@gmail.com">zhaoxiaoyong</a>
@@ -47,6 +50,32 @@ public class BaseController extends Controller {
                 badRequest(Error.client(error.message()));
             }
         }
+    }
+
+    /**
+     * map dto to model.
+     *
+     * @param source
+     * @param destinationClass
+     * @param <S>
+     * @param <D>
+     * @return
+     */
+    public static <S, D> D mapDto(S source, Class<D> destinationClass) {
+        return BeanMapper.map(source, destinationClass);
+    }
+
+    /**
+     * map dto list to model list.
+     *
+     * @param sourceList
+     * @param destinationClass
+     * @param <S>
+     * @param <D>
+     * @return
+     */
+    public static <S, D> List<D> mapDto(Iterable<S> sourceList, Class<D> destinationClass) {
+        return BeanMapper.mapList(sourceList, destinationClass);
     }
 
     /**
@@ -118,6 +147,7 @@ public class BaseController extends Controller {
         request.format = "json";
         forbidden(message);
     }
+
     protected static void forbidden(Error error) {
         request.format = "json";
         throw new Forbidden(error.toPrettyJson());

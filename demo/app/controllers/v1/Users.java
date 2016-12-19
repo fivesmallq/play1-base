@@ -28,7 +28,7 @@ public class Users extends API {
     }
 
     public static void get(@Required @Min(1) Long id) {
-        forbidden(id);
+        forbiddenAccess(id);
         User user = users.get(id);
         if (user != null) {
             renderJSON(user);

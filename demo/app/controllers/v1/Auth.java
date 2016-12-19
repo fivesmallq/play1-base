@@ -1,6 +1,7 @@
 package controllers.v1;
 
 import controllers.api.API;
+import controllers.dto.UserDto;
 import models.User;
 import models.api.Token;
 import utils.JWTUtils;
@@ -12,7 +13,8 @@ import utils.JWTUtils;
  */
 public class Auth extends API {
     public static void auth() {
-        User user = readBody(User.class);
+        UserDto dto = readBody(UserDto.class);
+        User user = mapDto(dto, User.class);
         //check password
         String jwt = JWTUtils.sign(user.id);
         Token token = new Token(jwt);
