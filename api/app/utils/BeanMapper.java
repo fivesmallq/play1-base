@@ -7,16 +7,18 @@ import org.apache.commons.beanutils.BeanUtils;
 import java.util.List;
 
 public class BeanMapper {
-
+    public static <S, D> D map(S source, D dest) {
+        try {
+            BeanUtils.copyProperties(dest, source);
+        } catch (Exception e) {
+            throw new RuntimeException("map data error! source: " + source + " target:" + dest);
+        }
+        return dest;
+    }
 
     public static <S, D> D map(S source, Class<D> destinationClass) {
         D d = Reflect.on(destinationClass).create().get();
-        try {
-            BeanUtils.copyProperties(d, source);
-        } catch (Exception e) {
-            throw new RuntimeException("map data error! target class:" + destinationClass);
-        }
-        return d;
+        return map(source, d);
     }
 
 

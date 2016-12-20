@@ -56,6 +56,19 @@ public class BaseController extends Controller {
      * map dto to model.
      *
      * @param source
+     * @param dest
+     * @param <S>
+     * @param <D>
+     * @return
+     */
+    public static <S, D> D mapDto(S source, D dest) {
+        return BeanMapper.map(source, dest);
+    }
+
+    /**
+     * map dto to model.
+     *
+     * @param source
      * @param destinationClass
      * @param <S>
      * @param <D>
