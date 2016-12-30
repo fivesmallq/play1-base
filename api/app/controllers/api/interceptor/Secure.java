@@ -21,7 +21,7 @@ import java.util.Map;
  * @date 15/4/27 下午5:38
  */
 public class Secure extends BaseController {
-    @Before
+    @Before(priority = 10)
     static void checkAccess() {
         if (Utility.skip(Secure.class, request)) {
             return;

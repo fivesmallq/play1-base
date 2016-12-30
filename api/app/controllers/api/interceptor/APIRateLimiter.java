@@ -29,7 +29,7 @@ public class APIRateLimiter extends BaseController {
 
     private static final double DEFAULT_LIMIT = Double.valueOf(API_LIMIT);
 
-    @Before
+    @Before(priority = 9)
     static void rateLimiting() {
         try {
             Error error = new Error();

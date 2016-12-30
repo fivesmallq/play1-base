@@ -2,7 +2,7 @@ package controllers.api.interceptor;
 
 import controllers.api.RequestId;
 import org.apache.commons.lang.StringUtils;
-import play.mvc.After;
+import play.mvc.Before;
 import play.mvc.Controller;
 
 /**
@@ -14,7 +14,7 @@ import play.mvc.Controller;
  */
 public class APIResponseWrapper extends Controller {
 
-    @After
+    @Before
     static void headers() {
         //set default content type
         response.setContentTypeIfNotSet("application/json; charset=utf-8");
