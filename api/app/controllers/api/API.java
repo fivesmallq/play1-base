@@ -16,7 +16,7 @@ public class API extends BaseController {
     }
 
     /**
-     * read body data from request. conver to model type and validate it.
+     * read body data from request. convert to model type and validate it.
      * @param clazz
      * @param <T>
      * @return
