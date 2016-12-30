@@ -14,11 +14,11 @@ Add it to your ``dependencies.yml``
 ```yaml
 require:
     - play
-    - play1-base -> api 0.2.1
+    - play1-base -> api 0.2.2
 repositories:
     - play-api:
           type: http
-          artifact: http://play.nll.im/play-api/api-0.2.1.zip
+          artifact: http://play.nll.im/play-api/api-0.2.2.zip
           contains:
             - play1-base -> api
 ```
