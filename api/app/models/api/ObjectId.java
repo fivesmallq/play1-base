@@ -77,6 +77,15 @@ public final class ObjectId implements Comparable<ObjectId>, Serializable {
     }
 
     /**
+     * Gets a new object id of string.
+     *
+     * @return the new id of string
+     */
+    public static String stringId() {
+        return ObjectId.get().toString();
+    }
+
+    /**
      * Checks if a string could be an {@code ObjectId}.
      *
      * @param hexString a potential ObjectId as a String.
