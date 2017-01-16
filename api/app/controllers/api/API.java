@@ -17,6 +17,7 @@ public class API extends BaseController {
 
     /**
      * read body data from request. convert to model type and validate it.
+     *
      * @param clazz
      * @param <T>
      * @return
@@ -26,8 +27,17 @@ public class API extends BaseController {
         if (StringUtils.isNullOrEmpty(body)) {
             badRequest("request body is required");
         }
-        T data= JSON.parseObject(body, clazz);
+        T data = JSON.parseObject(body, clazz);
         validate(data);
         return data;
+    }
+
+    /**
+     * set total count header.
+     *
+     * @param totalCount
+     */
+    protected static void setTotalCount(Object totalCount) {
+        response.setHeader("X-Total-Count", String.valueOf(totalCount));
     }
 }
