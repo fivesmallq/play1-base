@@ -107,6 +107,14 @@ public class BaseController extends Controller {
     }
 
     /**
+     * Send a 201 Created
+     */
+    protected static void created(String json) {
+        request.format = "json";
+        throw new Created(json);
+    }
+
+    /**
      * Send a 204 NO CONTENT
      */
     protected static void noContent() {

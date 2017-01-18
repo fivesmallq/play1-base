@@ -19,6 +19,11 @@ public class Created extends Status {
         this.json=JSON.toJSONString(data);
     }
 
+    public Created(String json) {
+        super(Http.StatusCode.CREATED);
+        this.json = json;
+    }
+
     @Override
     public void apply(Http.Request request, Http.Response response) {
         response.status = Http.StatusCode.CREATED;
