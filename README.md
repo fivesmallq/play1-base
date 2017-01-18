@@ -1,4 +1,4 @@
-#play1-base 
+#play1-base
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
 Play framework 1.4.x base module for build RESTful api.
@@ -14,11 +14,11 @@ Add it to your ``dependencies.yml``
 ```yaml
 require:
     - play
-    - play1-base -> api 0.2.2
+    - play1-base -> api 0.2.5
 repositories:
     - play-api:
           type: http
-          artifact: http://play.nll.im/play-api/api-0.2.2.zip
+          artifact: http://play.nll.im/play-api/api-0.2.5.zip
           contains:
             - play1-base -> api
 ```
