@@ -2,8 +2,8 @@ package controllers.api.interceptor;
 
 import controllers.api.RequestId;
 import org.apache.commons.lang.StringUtils;
-import play.mvc.Before;
 import play.mvc.Controller;
+import play.mvc.Finally;
 
 /**
  * 设置一些 api response 通用参数. 比如返回的 header 和 cros
@@ -14,7 +14,7 @@ import play.mvc.Controller;
  */
 public class APIResponseWrapper extends Controller {
 
-    @Before
+    @Finally
     static void headers() {
         //set default content type
         response.setContentTypeIfNotSet("application/json; charset=utf-8");
