@@ -40,6 +40,7 @@ public class Users extends API {
     public static void save() {
         User user = readBody(User.class);
         users.put(111L, user);
+        //created(user.toPrettyJson());
         created(user);
     }
 

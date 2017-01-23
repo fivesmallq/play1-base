@@ -165,8 +165,7 @@ public class BaseController extends Controller {
     protected static void forbidden(String message) {
         Error error = new Error();
         error.setCodeMsg(ErrorCode.CLIENT_ACCESS_DENIED, message);
-        request.format = "json";
-        forbidden(message);
+        forbidden(error);
     }
 
     protected static void forbidden(Error error) {
@@ -179,11 +178,16 @@ public class BaseController extends Controller {
         throw new Unauthorized(error.toPrettyJson());
     }
 
+    protected static void unauthorized(String message) {
+        Error error = new Error();
+        error.setCodeMsg(ErrorCode.CLIENT_ACCESS_DENIED, message);
+        unauthorized(error);
+    }
+
     protected static void unauthorized() {
         Error error = new Error();
         error.setCodeWithDefaultMsg(ErrorCode.CLIENT_ACCESS_DENIED);
-        request.format = "json";
-        throw new Unauthorized(error.toPrettyJson());
+        unauthorized(error);
     }
 
 
