@@ -38,12 +38,12 @@ public class Users extends API {
     }
 
     public static void save() {
+        //List<User> users2 = readBodyList(User.class);
         User user = readBody(User.class);
         users.put(111L, user);
         //created(user.toPrettyJson());
         created(user);
     }
-
 
 
     public static void list() {
