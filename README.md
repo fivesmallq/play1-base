@@ -18,7 +18,7 @@ require:
 repositories:
     - play-api:
           type: http
-          artifact: http://play.nll.im/play-api/api-0.2.6.zip
+          artifact: http://pek3a.qingstor.com/playbase/play-api/api-0.2.6.zip
           contains:
             - play1-base -> api
 ```
@@ -32,7 +32,7 @@ require:
 repositories:
     - play-jongo:
           type: http
-          artifact: http://play.nll.im/play-jongo/jongo-0.1.zip
+          artifact: http://pek3a.qingstor.com/playbase/play-jongo/jongo-0.1.zip
           contains:
             - play1-base -> jongo
 ```
