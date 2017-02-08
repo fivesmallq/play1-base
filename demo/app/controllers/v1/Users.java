@@ -5,10 +5,7 @@ import models.User;
 import play.data.validation.Min;
 import play.data.validation.Required;
 
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -38,11 +35,16 @@ public class Users extends API {
     }
 
     public static void save() {
-        //List<User> users2 = readBodyList(User.class);
         User user = readBody(User.class);
         users.put(111L, user);
         //created(user.toPrettyJson());
         created(user);
+    }
+
+    public static void saveList() {
+        List<User> users2 = readBodyList(User.class);
+        System.out.println("save user list success");
+        created(users2);
     }
 
 

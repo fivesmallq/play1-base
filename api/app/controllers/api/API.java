@@ -1,11 +1,11 @@
 package controllers.api;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.TypeReference;
 import controllers.api.interceptor.*;
 import play.mvc.With;
 import utils.StringUtils;
 
+import java.lang.reflect.Type;
 import java.util.List;
 
 @With({APIRequestWrapper.class, APIRateLimiter.class, RequestLog.class, ExceptionCatcher.class, Gzip.class, APIResponseWrapper.class})
@@ -47,10 +47,12 @@ public class API extends BaseController {
         if (StringUtils.isNullOrEmpty(body)) {
             badRequest("request body is required");
         }
-        List<T> data = JSON.parseObject(body, new TypeReference<List<T>>() {
-        });
-        validate(data);
-        return data;
+        Type[] types = new Type[]{clazz};
+        List<T> list = (List<T>) JSON.parseArray(body, types);
+        for (T data : list) {
+            validate(data);
+        }
+        return list;
     }
 
     /**
