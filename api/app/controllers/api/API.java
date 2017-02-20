@@ -6,6 +6,7 @@ import controllers.api.interceptor.*;
 import play.mvc.With;
 import utils.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @With({APIRequestWrapper.class, APIRateLimiter.class, RequestLog.class, ExceptionCatcher.class, Gzip.class, APIResponseWrapper.class})
@@ -63,5 +64,13 @@ public class API extends BaseController {
      */
     protected static void setTotalCount(Object totalCount) {
         response.setHeader("X-Total-Count", String.valueOf(totalCount));
+    }
+
+    /**
+     * set total count header to 0 and render empty list.
+     */
+    protected static void renderEmptyList() {
+        response.setHeader("X-Total-Count", "0");
+        renderJSON(new ArrayList<>());
     }
 }

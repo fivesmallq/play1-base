@@ -47,7 +47,9 @@ public class Users extends API {
         created(users2);
     }
 
-
+    public static void listEmpty() {
+        renderEmptyList();
+    }
     public static void list() {
         renderJSON(users.values());
     }

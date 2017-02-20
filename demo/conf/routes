@@ -14,6 +14,7 @@ GET     /public/                                staticDir:public
 
 GET     /v1/users/{id}                          v1.Users.get
 GET     /v1/users                               v1.Users.list
+GET     /v1/usersempty                          v1.Users.listEmpty
 POST    /v1/users                               v1.Users.save
 POST    /v1/users2                              v1.Users.saveList
 POST    /v1/auth                                v1.Auth.auth
