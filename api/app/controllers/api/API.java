@@ -50,11 +50,13 @@ public class API extends BaseController {
         }
         List<T> list = JSON.parseObject(body, new TypeReference<List<T>>() {
         });
+        List<T> typedList = new ArrayList<>();
         for (T data : list) {
             T newData = JSON.toJavaObject((JSON) data, clazz);
             validate(newData);
+            typedList.add(newData);
         }
-        return list;
+        return typedList;
     }
 
     /**
