@@ -9,7 +9,7 @@ import utils.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-@With({APIRequestWrapper.class, APIRateLimiter.class, RequestLog.class, ExceptionCatcher.class, Gzip.class, APIResponseWrapper.class})
+@With({APIRequestWrapper.class, RequestLog.class, ExceptionCatcher.class, Gzip.class, APIResponseWrapper.class})
 public class API extends BaseController {
 
     public static void notFoundPage() {
