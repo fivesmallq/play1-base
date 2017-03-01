@@ -27,10 +27,13 @@ public class APIResponseWrapper extends Controller {
         }
         //set cors
         response.accessControl("*");
-        response.setHeader("Access-Control-Expose-Headers",
-                "Origin, Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, Accept-Encoding, X-Request-Id, X-Total-Count");
-        response.setHeader("Access-Control-Allow-Headers",
-                "Origin, Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, Accept-Encoding, X-Request-Id, X-Total-Count");
+        if (request.method.equals("OPTIONS")) {
+            response.setHeader("Access-Control-Allow-Headers",
+                    "Origin, Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, Accept-Encoding, X-Request-Id, X-Total-Count");
+        } else {
+            response.setHeader("Access-Control-Expose-Headers",
+                    "Origin, Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, Accept-Encoding, X-Request-Id, X-Total-Count");
+        }
         response.setHeader("Access-Control-Allow-Methods", "OPTIONS, GET, POST, PATCH, PUT, DELETE");
     }
 }
