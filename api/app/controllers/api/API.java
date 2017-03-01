@@ -16,7 +16,7 @@ public class API extends BaseController {
         if (request.method.equals("OPTIONS")) {
             ok();
         }
-        notFound("请求地址错误");
+        notFound(request.path + " not found");
     }
 
     /**
