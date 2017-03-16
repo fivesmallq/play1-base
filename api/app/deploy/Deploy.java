@@ -1,6 +1,7 @@
 package deploy;
 
 import play.Play;
+import utils.Logs;
 
 /**
  * @author <a href="mailto:fivesmallq@gmail.com">fivesmallq</a>
@@ -12,6 +13,9 @@ public class Deploy {
 
     static {
         mode = Mode.valueOf(Play.configuration.getProperty("deploy.mode", "DEV").toUpperCase());
+        if (!mode.isProd()) {
+            Logs.warn("You're deploy service! in {} mode", mode.toString());
+        }
     }
 
     /**
