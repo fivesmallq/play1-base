@@ -4,7 +4,7 @@ require:
     - play 1.4
     - com.google.guava -> guava 20.0:
        transitive: false
-    - com.alibaba -> fastjson 1.2.21:
+    - com.alibaba -> fastjson 1.2.29:
        transitive: false
     - com.auth0 -> java-jwt 2.2.0:
        transitive: false
