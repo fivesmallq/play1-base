@@ -1,14 +1,14 @@
-#play1-base
+# play1-base
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
 Play framework 1.4.x base module for build RESTful api.
 
-#Features
+# Features
 
 * todo
 
 
-#Usage
+# Usage
 To add a dependency on api module. use the following:
 Add it to your ``dependencies.yml``
 ```yaml
@@ -38,14 +38,14 @@ repositories:
 ```
 
 
-#Examples
+# Examples
 
-###API
+### API
 
 TODO
 
 
 
-#Contributing
+# Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/fivesmallq/play1-base.
