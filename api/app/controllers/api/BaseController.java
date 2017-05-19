@@ -8,6 +8,7 @@ import models.api.Error;
 import models.api.ErrorCode;
 import models.api.Jsonable;
 import org.apache.commons.lang.StringUtils;
+import play.Play;
 import play.mvc.Before;
 import play.mvc.Controller;
 import play.mvc.results.BadRequest;
@@ -15,8 +16,10 @@ import play.mvc.results.Forbidden;
 import play.mvc.results.NotFound;
 import utils.BeanMapper;
 import utils.Logs;
+import utils.TypeUtils;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author <a href="mailto:yongxiaozhao@gmail.com">zhaoxiaoyong</a>
@@ -24,6 +27,35 @@ import java.util.List;
  *          date 2016/5/12 9:21
  */
 public class BaseController extends Controller {
+    private static String requestClaimsName = Play.configuration.getProperty("api.request.claims.name", "claims");
+
+    /**
+     * get claims in jwt token.
+     *
+     * @return
+     */
+    protected static Map<String, Object> claims() {
+        return (Map<String, Object>) request.args.get(requestClaimsName);
+    }
+
+    /**
+     * get user id in jwt token.
+     *
+     * @return
+     */
+    protected static String currentUserId() {
+        return (String) request.args.get("aud");
+    }
+
+    /**
+     * get user id in jwt token with type.
+     *
+     * @return
+     */
+    protected static <T> T currentUserId(Class<T> clazz) {
+        return TypeUtils.cast(request.args.get("aud"), clazz);
+    }
+
     /**
      * 验证path参数
      */
@@ -229,6 +261,5 @@ public class BaseController extends Controller {
         request.format = "json";
         throw new play.mvc.results.Error(error.toPrettyJson());
     }
-
 
 }

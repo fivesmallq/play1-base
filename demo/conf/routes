@@ -18,4 +18,6 @@ GET     /v1/usersempty                          v1.Users.listEmpty
 POST    /v1/users                               v1.Users.save
 POST    /v1/users2                              v1.Users.saveList
 POST    /v1/auth                                v1.Auth.auth
+GET     /v1/auth2                                v1.Auth.auth2
+GET     /v1/auth3                                v1.Auth.auth3
 *       /.*                                     api.API.notFoundPage

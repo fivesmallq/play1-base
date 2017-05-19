@@ -3,6 +3,8 @@ package controllers.api;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import controllers.api.interceptor.*;
+import play.Play;
+import play.libs.Time;
 import play.mvc.With;
 import utils.StringUtils;
 
@@ -11,6 +13,8 @@ import java.util.List;
 
 @With({APIRequestWrapper.class, RequestLog.class, ExceptionCatcher.class, Gzip.class, APIResponseWrapper.class})
 public class API extends BaseController {
+    private static String COOKIE_TOKEN_NAME = Play.configuration.getProperty("api.token.cookie", "jwt");
+    private static String COOKIE_SECURE = Play.configuration.getProperty("application.session.secure", "false");
 
     public static void notFoundPage() {
         if (request.method.equals("OPTIONS")) {
@@ -67,6 +71,40 @@ public class API extends BaseController {
     protected static void setTotalCount(Object totalCount) {
         response.setHeader("X-Total-Count", String.valueOf(totalCount));
     }
+
+    /**
+     * set jwt token cookie with httpOnly and secure deps on your 'application.session.secure' setting.
+     *
+     * @param jwt
+     * @param duration like 2h, 3d
+     */
+    protected static void setJWTCookie(String jwt, String duration) {
+        response.setCookie(COOKIE_TOKEN_NAME, jwt, null, "/", Time.parseDuration(duration), Boolean.parseBoolean(COOKIE_SECURE), true);
+    }
+
+    /**
+     * set jwt token cookie.
+     *
+     * @param jwt
+     * @param domain
+     * @param path
+     * @param duration
+     * @param secure
+     * @param httpOnly
+     */
+    protected static void setJWTCookie(String jwt, String domain, String path, String duration, boolean secure, boolean httpOnly) {
+        response.setCookie(COOKIE_TOKEN_NAME, jwt, domain, path, Time.parseDuration(duration), secure, httpOnly);
+    }
+
+    /**
+     * set jwt token session cookie with httpOnly and secure deps on your 'application.session.secure' setting.
+     *
+     * @param jwt
+     */
+    protected static void setJWTSessionCookie(String jwt) {
+        response.setCookie(COOKIE_TOKEN_NAME, jwt, null, "/", null, Boolean.parseBoolean(COOKIE_SECURE), true);
+    }
+
 
     /**
      * set total count header to 0 and render empty list.
