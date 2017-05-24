@@ -28,6 +28,7 @@ import java.util.Map;
  */
 public class BaseController extends Controller {
     private static String requestClaimsName = Play.configuration.getProperty("api.request.claims.name", "claims");
+    private static String mockAud = Play.configuration.getProperty("api.request.mock.aud", "");
 
     /**
      * get claims in jwt token.
@@ -44,6 +45,11 @@ public class BaseController extends Controller {
      * @return
      */
     protected static String currentUserId() {
+        if (Play.mode.isDev()) {
+            if (StringUtils.isNotEmpty(mockAud)) {
+                request.args.put("aud", mockAud);
+            }
+        }
         return (String) request.args.get("aud");
     }
 
