@@ -112,4 +112,10 @@ public final class Error implements Jsonable {
         error.message = message;
         return error;
     }
+
+    public static Error locked() {
+        Error error = new Error();
+        error.setCodeWithDefaultMsg(ErrorCode.CLIENT_TIMEOUT_LOCKED);
+        return error;
+    }
 }

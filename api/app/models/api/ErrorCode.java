@@ -45,6 +45,11 @@ public final class ErrorCode {
     @Remark(remark = "访问被拒绝")
     public static final int CLIENT_ACCESS_DENIED = 1400;
     /**
+     * 客户端超时退出
+     */
+    @Remark(remark = "客户端超时退出")
+    public static final int CLIENT_TIMEOUT_LOCKED = 1500;
+    /**
      * 找不到资源
      */
     @Remark(remark = "找不到资源")
