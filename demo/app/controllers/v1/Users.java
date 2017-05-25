@@ -47,9 +47,22 @@ public class Users extends API {
         created(users2);
     }
 
+    public static void saveString() {
+        Integer users2 = readBody(Integer.class);
+        System.out.println("save user integer success");
+        created(users2);
+    }
+
+    public static void saveStringList() {
+        List<Integer> users2 = readBodyList(Integer.class);
+        System.out.println("save user string list success");
+        created(users2);
+    }
+
     public static void listEmpty() {
         renderEmptyList();
     }
+
     public static void list() {
         renderJSON(users.values());
     }

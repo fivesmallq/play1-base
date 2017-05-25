@@ -7,6 +7,7 @@ import play.Play;
 import play.libs.Time;
 import play.mvc.With;
 import utils.StringUtils;
+import utils.TypeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,11 +57,22 @@ public class API extends BaseController {
         });
         List<T> typedList = new ArrayList<>();
         for (T data : list) {
-            T newData = JSON.toJavaObject((JSON) data, clazz);
-            validate(newData);
-            typedList.add(newData);
+            if (isPrimitiveOrPrimitiveWrapperOrString(clazz)) {
+                typedList.add(TypeUtils.cast(data, clazz));
+            } else {
+                T newData = JSON.toJavaObject((JSON) data, clazz);
+                validate(newData);
+                typedList.add(newData);
+            }
         }
         return typedList;
+    }
+
+    private static boolean isPrimitiveOrPrimitiveWrapperOrString(Class<?> type) {
+        return (type.isPrimitive() && type != void.class) ||
+                type == Double.class || type == Float.class || type == Long.class ||
+                type == Integer.class || type == Short.class || type == Character.class ||
+                type == Byte.class || type == Boolean.class || type == String.class;
     }
 
     /**
