@@ -16,8 +16,13 @@ public class APIResponseWrapper extends Controller {
 
     @Finally
     static void headers() {
+        String defaultContentType = "application/json; charset=utf-8";
         //set default content type
-        response.setContentTypeIfNotSet("application/json; charset=utf-8");
+        response.setContentTypeIfNotSet(defaultContentType);
+        //playframework default content type without utf-8
+        if (response.contentType.equals("application/json")) {
+            response.contentType = defaultContentType;
+        }
         //request id
         if (StringUtils.isNotEmpty(session.getId())) {
             response.setHeader("X-Session-Id", session.getId());
