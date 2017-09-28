@@ -18,13 +18,15 @@ import utils.BeanMapper;
 import utils.Logs;
 import utils.TypeUtils;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author <a href="mailto:yongxiaozhao@gmail.com">zhaoxiaoyong</a>
  * @version Revision: 1.0
- *          date 2016/5/12 9:21
+ * date 2016/5/12 9:21
  */
 public class BaseController extends Controller {
     private static String requestClaimsName = Play.configuration.getProperty("api.request.claims.name", "claims");
@@ -36,7 +38,33 @@ public class BaseController extends Controller {
      * @return
      */
     protected static Map<String, Object> claims() {
+        if (Play.mode.isDev()) {
+            Map<String, Object> mockdatas = new HashMap<>();
+            Set<String> propertyNames = Play.configuration.stringPropertyNames();
+            for (String property : propertyNames) {
+                if (property.startsWith("mock.")) {
+                    mockdatas.put(property, Play.configuration.getProperty(property));
+                }
+            }
+            return mockdatas;
+        }
         return (Map<String, Object>) request.args.get(requestClaimsName);
+    }
+
+    /**
+     * get claim value in jwt token.
+     *
+     * @return
+     */
+    protected static <T> T getClaim(String name) {
+        if (Play.mode.isDev()) {
+            String nameValue = Play.configuration.getProperty("mock." + name, "");
+            if (StringUtils.isNotEmpty(nameValue)) {
+                return (T) nameValue;
+            }
+        }
+        Map<String, Object> claims = (Map<String, Object>) request.args.get(requestClaimsName);
+        return (T) claims.get(name);
     }
 
     /**
