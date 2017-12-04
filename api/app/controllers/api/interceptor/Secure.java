@@ -36,11 +36,14 @@ public class Secure extends BaseController {
             error.setCodeWithDefaultMsg(ErrorCode.CLIENT_AUTH_ERROR);
             Http.Header header = request.headers.get("authorization");
             Http.Cookie cookie = request.cookies.get(COOKIE_TOKEN_NAME);
+            String authQuery = request.params.get("authorization");
             String token = "";
             if (header != null && StringUtils.isNotEmpty(header.value())) {
                 token = header.value();
                 //header value with 'Bearer'
                 token = StringUtils.substringAfter(token, "Bearer").trim();
+            } else if (StringUtils.isNotBlank(authQuery)) {
+                token = StringUtils.substringAfter(authQuery, "Bearer").trim();
             } else if (Boolean.parseBoolean(enableCookieAuth)) {
                 if (cookie != null && StringUtils.isNotEmpty(cookie.value)) {
                     token = cookie.value;

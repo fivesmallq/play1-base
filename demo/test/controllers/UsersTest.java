@@ -1,13 +1,16 @@
 package controllers;
 
 import com.alibaba.fastjson.JSON;
+import com.google.common.collect.Maps;
 import controllers.dto.UserDto;
 import models.User;
-import models.api.Jsonable;
 import models.api.Error;
+import models.api.Jsonable;
 import org.junit.Test;
 import play.mvc.Http;
 import play.test.FunctionalTest;
+
+import java.util.Map;
 
 import static play.mvc.Http.StatusCode.BAD_REQUEST;
 import static play.mvc.Http.StatusCode.CREATED;
@@ -44,6 +47,14 @@ public class UsersTest extends FunctionalTest {
     @Test
     public void list() throws Exception {
 
+    }
+
+    @Test
+    public void testAuth() {
+        Map<String, String> map = Maps.newHashMap();
+        map.put("authorization", "Bearer asdqeqeqweqdqd");
+        Http.Response response = FunctionalTest.GET("http://localhost:9000/v1/users/1?authorization='Bearer asdqeqeqweqdqd'");
+        System.out.println(response.out.toString());
     }
 
 }
