@@ -25,6 +25,8 @@ public class Secure extends BaseController {
     private static String COOKIE_TOKEN_NAME = Play.configuration.getProperty("api.token.cookie", "jwt");
     private static String enableCookieAuth = Play.configuration.getProperty("api.token.cookie.enable", "false");
     private static String requestClaimsName = Play.configuration.getProperty("api.request.claims.name", "claims");
+    private static String enableQueryStringAuth = Play.configuration.getProperty("api.token.queryString.enable", "false");
+    private static String tokenQueryStringName = Play.configuration.getProperty("api.token.queryString", "jwt");
 
     @Before(priority = 10)
     static void checkAccess() {
@@ -36,11 +38,16 @@ public class Secure extends BaseController {
             error.setCodeWithDefaultMsg(ErrorCode.CLIENT_AUTH_ERROR);
             Http.Header header = request.headers.get("authorization");
             Http.Cookie cookie = request.cookies.get(COOKIE_TOKEN_NAME);
+            String authQuery = request.params.get(tokenQueryStringName);
             String token = "";
             if (header != null && StringUtils.isNotEmpty(header.value())) {
                 token = header.value();
                 //header value with 'Bearer'
                 token = StringUtils.substringAfter(token, "Bearer").trim();
+            } else if (Boolean.parseBoolean(enableQueryStringAuth)) {
+                if (StringUtils.isNotBlank(authQuery)) {
+                    token = StringUtils.substringAfter(authQuery, "Bearer").trim();
+                }
             } else if (Boolean.parseBoolean(enableCookieAuth)) {
                 if (cookie != null && StringUtils.isNotEmpty(cookie.value)) {
                     token = cookie.value;
