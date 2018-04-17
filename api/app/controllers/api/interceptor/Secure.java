@@ -44,10 +44,8 @@ public class Secure extends BaseController {
                 token = header.value();
                 //header value with 'Bearer'
                 token = StringUtils.substringAfter(token, "Bearer").trim();
-            } else if (Boolean.parseBoolean(enableQueryStringAuth)) {
-                if (StringUtils.isNotBlank(authQuery)) {
-                    token = authQuery;
-                }
+            } else if (StringUtils.isNotBlank(authQuery) && Boolean.parseBoolean(enableQueryStringAuth)) {
+                token = authQuery;
             } else if (Boolean.parseBoolean(enableCookieAuth)) {
                 if (cookie != null && StringUtils.isNotEmpty(cookie.value)) {
                     token = cookie.value;

@@ -2,7 +2,7 @@
 
 require:
     - play
-    - play1-base -> api 0.3.6
+    - play1-base -> api 0.3.7
     - play1-base -> jongo 0.1
     - play-codeborne -> logger 2.1
 repositories:

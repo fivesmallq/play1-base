@@ -1,4 +1,4 @@
-self: play -> api 0.3.6
+self: play -> api 0.3.7
 
 require:
     - play 1.4
