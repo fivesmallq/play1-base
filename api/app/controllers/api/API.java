@@ -2,6 +2,7 @@ package controllers.api;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import com.google.common.collect.Maps;
 import controllers.api.interceptor.*;
 import play.Play;
 import play.libs.Time;
@@ -11,6 +12,7 @@ import utils.TypeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @With({APIRequestWrapper.class, RequestLog.class, ExceptionCatcher.class, Gzip.class, APIResponseWrapper.class})
 public class API extends BaseController {
@@ -66,6 +68,45 @@ public class API extends BaseController {
             }
         }
         return typedList;
+    }
+
+    /**
+     * read queryString data from request. convert to model type and validate it.
+     *
+     * @param clazz
+     * @param <T>
+     * @return
+     */
+    protected static <T> T readQueryBody(Class<T> clazz) {
+        String queryString = request.querystring;
+        if (StringUtils.isNullOrEmpty(queryString)) {
+            badRequest("request query is required");
+        }
+        T data = JSON.parseObject(JSON.toJSONString(getUrlParams(queryString)), clazz);
+        validate(data);
+        return data;
+    }
+
+    /**
+     * url query param to map
+     *
+     * @param param aa=11&bb=22&cc=33
+     * @return
+     */
+    private static Map<String, Object> getUrlParams(String param) {
+        if (StringUtils.isNullOrEmpty(param)) {
+            return Maps.newHashMap();
+        }
+        String[] params = param.split("&");
+        Map<String, Object> map = Maps.newHashMapWithExpectedSize(params.length);
+
+        for (int i = 0; i < params.length; i++) {
+            String[] p = params[i].split("=");
+            if (p.length == 2) {
+                map.put(p[0], p[1]);
+            }
+        }
+        return map;
     }
 
     private static boolean isPrimitiveOrPrimitiveWrapperOrString(Class<?> type) {
