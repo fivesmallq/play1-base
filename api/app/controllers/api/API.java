@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.google.common.collect.Maps;
 import controllers.api.interceptor.*;
+import org.apache.commons.beanutils.BeanUtils;
+import org.jboss.netty.handler.codec.http.QueryStringDecoder;
 import play.Play;
 import play.libs.Time;
 import play.mvc.With;
@@ -78,35 +80,36 @@ public class API extends BaseController {
      * @return
      */
     protected static <T> T readQueryBody(Class<T> clazz) {
-        String queryString = request.querystring;
-        if (StringUtils.isNullOrEmpty(queryString)) {
-            badRequest("request query is required");
+        T data = null;
+        try {
+            data = clazz.newInstance();
+            BeanUtils.populate(data, getUrlParams());
+        } catch (Exception e) {
+            badRequest("Unsupported parameter type");
         }
-        T data = JSON.parseObject(JSON.toJSONString(getUrlParams(queryString)), clazz);
         validate(data);
         return data;
     }
 
     /**
      * url query param to map
+     * <p>
+     * ?name="xinput"&age=10&languages=["java","c","go"]
      *
-     * @param param aa=11&bb=22&cc=33
      * @return
      */
-    private static Map<String, Object> getUrlParams(String param) {
-        if (StringUtils.isNullOrEmpty(param)) {
-            return Maps.newHashMap();
-        }
-        String[] params = param.split("&");
-        Map<String, Object> map = Maps.newHashMapWithExpectedSize(params.length);
+    private static Map<String, Object> getUrlParams() {
+        Map<String, List<String>> uriAttributes = new QueryStringDecoder(request.url).getParameters();
 
-        for (int i = 0; i < params.length; i++) {
-            String[] p = params[i].split("=");
-            if (p.length == 2) {
-                map.put(p[0], p[1]);
-            }
-        }
-        return map;
+        Map<String, Object> paramMap = Maps.newHashMapWithExpectedSize(uriAttributes.size());
+
+        uriAttributes.forEach((key, attributes) -> {
+            attributes.forEach(attrVal -> {
+                paramMap.put(key, attrVal);
+            });
+        });
+
+        return paramMap;
     }
 
     private static boolean isPrimitiveOrPrimitiveWrapperOrString(Class<?> type) {
