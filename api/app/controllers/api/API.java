@@ -2,7 +2,10 @@ package controllers.api;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import com.google.common.collect.Maps;
 import controllers.api.interceptor.*;
+import org.apache.commons.beanutils.BeanUtils;
+import org.jboss.netty.handler.codec.http.QueryStringDecoder;
 import play.Play;
 import play.libs.Time;
 import play.mvc.With;
@@ -11,6 +14,7 @@ import utils.TypeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @With({APIRequestWrapper.class, RequestLog.class, ExceptionCatcher.class, Gzip.class, APIResponseWrapper.class})
 public class API extends BaseController {
@@ -66,6 +70,46 @@ public class API extends BaseController {
             }
         }
         return typedList;
+    }
+
+    /**
+     * read queryString data from request. convert to model type and validate it.
+     *
+     * @param clazz
+     * @param <T>
+     * @return
+     */
+    protected static <T> T readQueryBody(Class<T> clazz) {
+        T data = null;
+        try {
+            data = clazz.newInstance();
+            BeanUtils.populate(data, getUrlParams());
+        } catch (Exception e) {
+            badRequest("Unsupported parameter type");
+        }
+        validate(data);
+        return data;
+    }
+
+    /**
+     * url query param to map
+     * <p>
+     * ?name="xinput"&age=10&languages=["java","c","go"]
+     *
+     * @return
+     */
+    private static Map<String, Object> getUrlParams() {
+        Map<String, List<String>> uriAttributes = new QueryStringDecoder(request.url).getParameters();
+
+        Map<String, Object> paramMap = Maps.newHashMapWithExpectedSize(uriAttributes.size());
+
+        uriAttributes.forEach((key, attributes) -> {
+            attributes.forEach(attrVal -> {
+                paramMap.put(key, attrVal);
+            });
+        });
+
+        return paramMap;
     }
 
     private static boolean isPrimitiveOrPrimitiveWrapperOrString(Class<?> type) {
