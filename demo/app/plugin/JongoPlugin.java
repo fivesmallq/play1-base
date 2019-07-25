@@ -1,4 +1,4 @@
-package play.modules.jongo;
+package plugin;
 
 /**
  * api metrics

@@ -3,9 +3,14 @@
 require:
     - play
     - play1-base -> api 0.3.8
-    - play1-base -> jongo 0.1
+#    - play1-base -> jongo 0.1
     - play-codeborne -> logger 2.1
+    - org.jongo -> jongo 1.4.0
+    - org.zeroturnaround -> zt-exec 1.11
+    - com.alibaba -> fastjson 1.2.21:
+        transitive: false
 repositories:
+
     - local-modules:
           type: local
           artifact: ${application.path}/../[module]
